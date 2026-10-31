@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camilo Restrepo — Diseñador de producto &amp; front-end · Medellín, Colombia</title>
+<meta name="description" content="Portafolio de Camilo Restrepo, diseñador de producto e ingeniero front-end en Medellín, Colombia. Productos digitales claros, rápidos y con personalidad.">
+<meta name="theme-color" content="#F2EDE2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300..800;1,300..800&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. Base y variables ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --papel:#F2EDE2;
+  --papel-2:#EAE3D2;
+  --tinta:#1B1812;
+  --tinta-2:#4A4437;      /* texto secundario sobre papel */
+  --tinta-suave:#655D49;  /* etiquetas y metadatos */
+  --linea:rgba(27,24,18,.18);
+  --verde:#136A4E;        /* acento principal (esmeralda) */
+  --acento-oscuro:#63B08A;/* acento sobre fondo oscuro */
+}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  font-family:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--papel);color:var(--tinta);
+  font-size:1.0625rem;line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+ul{list-style:none}
+::selection{background:var(--verde);color:var(--papel)}
+:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--papel)}
+::-webkit-scrollbar-thumb{background:#C9BFA6;border-radius:99px;border:2px solid var(--papel)}
+::-webkit-scrollbar-thumb:hover{background:var(--tinta-suave)}
+
+/* grano de papel sutil sobre toda la página */
+body::after{
+  content:"";position:fixed;inset:0;z-index:250;pointer-events:none;
+  opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23g)' opacity='0.6'/></svg>");
+}
+
+.contenedor{width:min(1200px,100% - clamp(2.5rem,8vw,6rem));margin-inline:auto}
+.icono{width:1.1em;height:1.1em;flex:none}
+.salto{position:absolute;left:-9999px;top:0;background:var(--tinta);color:var(--papel);padding:.8rem 1.4rem;z-index:1000}
+.salto:focus{left:1rem;top:1rem}
+.ocultar-movil{display:inline}
+
+/* animación de aparición al hacer scroll */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+[data-reveal].visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+
+/* ============ 2. Cursor personalizado (solo puntero fino) ============ */
+.cursor{display:none}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  body,a,button,.proyecto{cursor:none}
+  .cursor{
+    display:block;position:fixed;top:0;left:0;z-index:500;
+    width:10px;height:10px;border-radius:50%;
+    background:var(--papel);mix-blend-mode:difference;pointer-events:none;
+    transform:translate(-50%,-50%);
+    transition:width .25s,height .25s,background .25s,border-color .25s,opacity .3s;
+  }
+  .cursor--enlace{width:46px;height:46px;background:transparent;border:1.5px solid var(--papel)}
+  .cursor--pulsado{width:20px;height:20px}
+}
+
+/* ============ 3. Cabecera y menú móvil ============ */
+.cabecera{position:fixed;inset:0 0 auto;z-index:90;padding-block:1.15rem;transition:padding .3s,background .3s,border-color .3s;border-bottom:1px solid transparent}
+.cabecera.escrolled{background:rgba(242,237,226,.87);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--linea);padding-block:.8rem}
+.cabecera-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.marca{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;font-size:1.15rem;letter-spacing:-.01em}
+.marca-punto{color:var(--verde)}
+.nav-principal{display:flex;gap:2.2rem;margin-left:auto}
+.nav-principal a{position:relative;font-size:.95rem;font-weight:500;padding:.3rem 0}
+.nav-principal a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;background:var(--verde);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.nav-principal a:hover::after{transform:scaleX(1);transform-origin:left}
+.cabecera-meta{display:flex;align-items:center;gap:1.4rem}
+.cabecera-reloj{font-size:.82rem;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.cabecera-cta{border:1px solid var(--tinta);border-radius:999px;padding:.55rem 1.2rem;font-size:.88rem;font-weight:600;transition:background .3s,color .3s}
+.cabecera-cta:hover{background:var(--tinta);color:var(--papel)}
+.menu-btn{display:none;width:44px;height:44px;flex-direction:column;justify-content:center;align-items:center;gap:7px;background:none;border:1px solid var(--linea);border-radius:50%}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--tinta);transition:transform .35s}
+body.menu-abierto .menu-btn span:first-child{transform:translateY(4.5px) rotate(45deg)}
+body.menu-abierto .menu-btn span:last-child{transform:translateY(-4.5px) rotate(-45deg)}
+
+.menu-movil{
+  position:fixed;inset:0;z-index:80;background:var(--papel);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:7.5rem clamp(1.25rem,6vw,3rem) 2rem;overflow-y:auto;
+  visibility:hidden;opacity:0;transition:opacity .4s,visibility .4s;
+}
+body.menu-abierto .menu-movil{visibility:visible;opacity:1}
+.menu-movil nav a{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:clamp(2.2rem,9vw,3.2rem);
+  padding:.75rem 0;border-bottom:1px solid var(--linea);
+  opacity:0;transform:translateY(24px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1),color .3s;
+}
+.menu-movil nav a:hover{color:var(--verde)}
+.menu-num{font-family:"Archivo",sans-serif;font-size:.85rem;font-weight:600;color:var(--verde);font-variant-numeric:tabular-nums}
+body.menu-abierto .menu-movil nav a{opacity:1;transform:none}
+body.menu-abierto .menu-movil nav a:nth-child(1){transition-delay:.08s}
+body.menu-abierto .menu-movil nav a:nth-child(2){transition-delay:.14s}
+body.menu-abierto .menu-movil nav a:nth-child(3){transition-delay:.2s}
+body.menu-abierto .menu-movil nav a:nth-child(4){transition-delay:.26s}
+.menu-pie{display:flex;flex-direction:column;gap:.4rem;font-size:.95rem;color:var(--tinta-suave);opacity:0;transition:opacity .5s .35s}
+body.menu-abierto .menu-pie{opacity:1}
+.menu-pie a{color:var(--tinta);font-weight:600}
+.menu-pie a:hover{color:var(--verde)}
+
+@media (max-width:1000px){.cabecera-reloj{display:none}}
+@media (max-width:840px){
+  .nav-principal,.cabecera-cta{display:none}
+  .menu-btn{display:flex}
+}
+
+/* ============ 4. Hero con mapa topográfico ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+#lienzoTopo{
+  position:absolute;inset:0;z-index:0;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 95%);
+  mask-image:linear-gradient(to bottom,#000 55%,transparent 95%);
+}
+.hero-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:7.5rem;padding-bottom:2rem}
+.hero-superior{display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap}
+.disponible{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+  border:1px solid var(--linea);border-radius:999px;padding:.55rem 1.1rem;
+  background:rgba(242,237,226,.72);
+}
+.pulso{width:8px;height:8px;border-radius:50%;background:var(--verde);position:relative;flex:none}
+.pulso::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--verde);animation:pulso 2.2s ease-out infinite}
+@keyframes pulso{from{transform:scale(.55);opacity:.9}to{transform:scale(1.5);opacity:0}}
+.hero-hora{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.hero-linea{margin:clamp(2.5rem,6vh,4rem) 0 1.1rem;font-size:clamp(1rem,1.6vw,1.2rem);font-weight:500}
+.rotador{
+  display:inline-block;overflow:hidden;vertical-align:bottom;
+  padding-bottom:.14em;margin-bottom:-.14em;
+  font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--verde);
+}
+#rotadorTexto{display:inline-block;transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .38s ease}
+#rotadorTexto.fuera{transform:translateY(-108%);opacity:0}
+#rotadorTexto.desde-abajo{transform:translateY(108%);opacity:0}
+#rotadorTexto.sin-transicion{transition:none!important}
+.hero-titulo{
+  font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;
+  font-size:clamp(2.5rem,8vw,6.5rem);font-weight:500;line-height:1.03;letter-spacing:-.025em;
+  margin-bottom:1.6rem;
+}
+.hero-titulo em{color:var(--verde)}
+.hero-sub{max-width:56ch;font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--tinta-2)}
+.hero-acciones{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.7rem;border:1px solid var(--tinta);border-radius:999px;font-weight:600;font-size:.95rem;transition:background .3s,color .3s,border-color .3s}
+.btn .icono{transition:transform .3s}
+.btn-primario{background:var(--tinta);color:var(--papel)}
+.btn-primario:hover{background:var(--verde);border-color:var(--verde)}
+.btn-primario:hover .icono{transform:translateY(3px)}
+.btn-secundario{background:transparent}
+.btn-secundario:hover{background:var(--tinta);color:var(--papel)}
+.hero-pie{position:relative;z-index:1;border-top:1px solid var(--linea)}
+.hero-pie-inner{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-block:1.05rem;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave)}
+.hero-scroll{display:inline-flex;align-items:center;gap:.55rem}
+.hero-scroll .icono{animation:bajar 2.2s ease-in-out infinite}
+@keyframes bajar{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion:reduce){.hero-scroll .icono{animation:none}}
+@media (max-width:600px){
+  .hero-titulo br{display:none}
+  .ocultar-movil{display:none}
+}
+
+/* ============ 5. Marquesina de especialidades ============ */
+.marquesina{background:var(--tinta);color:var(--papel);overflow:hidden;padding-block:1.05rem}
+.marquesina-track{display:flex;width:max-content;animation:desfile 30s linear infinite}
+.marquesina:hover .marquesina-track{animation-play-state:paused}
+.marquesina-grupo{display:flex;align-items:center;gap:3rem;padding-right:3rem}
+.marquesina-item{display:flex;align-items:center;gap:2rem;font-size:.88rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;white-space:nowrap}
+.marquesina-item .icono{width:.9rem;height:.9rem;color:var(--acento-oscuro)}
+@keyframes desfile{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquesina-track{animation:none}}
+
+/* ============ 6. Secciones (estructura editorial) ============ */
+.seccion{padding-block:clamp(4.5rem,9vw,7.5rem)}
+.seccion-tono{background:var(--papel-2);border-top:1px solid var(--tinta);border-bottom:1px solid var(--tinta)}
+.seccion-cabecera{
+  display:grid;grid-template-columns:1fr minmax(240px,32%);gap:1.5rem 4rem;align-items:end;
+  border-top:1px solid var(--tinta);padding-top:1.3rem;margin-bottom:clamp(2.8rem,6vw,4.5rem);
+}
+.ceja{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--tinta-suave);margin-bottom:1.1rem}
+.ceja-num{color:var(--verde);margin-right:.4rem;font-variant-numeric:tabular-nums}
+.seccion-titulo{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-size:clamp(2.1rem,4.6vw,3.6rem);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+.seccion-titulo em{color:var(--verde)}
+.seccion-nota{color:var(--tinta-suave);font-size:.95rem;line-height:1.55}
+@media (max-width:760px){.seccion-cabecera{grid-template-columns:1fr}}
+
+/* ============ 7. Lista de proyectos + vista previa flotante ============ */
+.lista-proyectos{border-bottom:1px solid var(--tinta)}
+.proyecto{border-top:1px solid var(--tinta)}
+.proyecto-fila{
+  display:grid;grid-template-columns:3rem minmax(0,1fr) auto auto;
+  column-gap:2rem;align-items:center;padding:2.3rem 0;
+}
+.indice{font-size:.85rem;font-weight:600;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.proyecto-titulo{
+  font-family:"Fraunces",Georgia,serif;font-size:clamp(1.7rem,3.6vw,2.9rem);font-weight:500;
+  line-height:1.1;letter-spacing:-.015em;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),color .3s;
+}
+.proyecto-desc{margin-top:.35rem;font-size:.95rem;color:var(--tinta-suave);max-width:46ch}
+.proyecto-meta{
+  display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;min-width:215px;
+  font-size:.76rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--tinta-suave);text-align:right;font-variant-numeric:tabular-nums;
+}
+.proyecto-flecha{
+  width:46px;height:46px;border:1px solid var(--linea);border-radius:50%;
+  display:grid;place-items:center;
+  transition:background .35s,color .35s,transform .45s cubic-bezier(.2,.7,.2,1),border-color .35s;
+}
+.proyecto:hover .proyecto-titulo,.proyecto:focus-visible .proyecto-titulo{color:var(--verde);transform:translateX(12px)}
+.proyecto:hover .indice,.proyecto:focus-visible .indice{color:var(--verde)}
+.proyecto:hover .proyecto-flecha,.proyecto:focus-visible .proyecto-flecha{background:var(--tinta);border-color:var(--tinta);color:var(--papel);transform:rotate(45deg)}
+.trabajo-nota{margin-top:2.6rem;color:var(--tinta-suave)}
+.trabajo-nota a{color:var(--tinta);font-weight:600;border-bottom:1.5px solid var(--verde);transition:color .3s}
+.trabajo-nota a:hover{color:var(--verde)}
+
+.proyecto-imagen{display:none}
+@media (max-width:820px),(hover:none){
+  .proyecto-imagen{display:block;margin-bottom:1.4rem}
+  .proyecto-imagen img{width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--linea)}
+  .proyecto-fila{grid-template-columns:1fr auto;padding-bottom:1.9rem}
+  .indice{display:none}
+  .proyecto-meta{grid-column:1/-1;flex-direction:row;align-items:center;gap:.35rem 1rem;min-width:0;text-align:left;margin-top:.3rem}
+  .proyecto-flecha{width:40px;height:40px}
+}
+.vista-previa{
+  position:fixed;top:0;left:0;z-index:60;width:min(340px,28vw);aspect-ratio:8/5;
+  border:1px solid var(--tinta);background:var(--papel-2);overflow:hidden;
+  pointer-events:none;opacity:0;transition:opacity .3s;will-change:transform;
+}
+.vista-previa.visible{opacity:1}
+.vista-previa img{width:100%;height:100%;object-fit:cover}
+
+/* ============ 8. Sobre mí ============ */
+.sobre-grid{display:grid;grid-template-columns:minmax(250px,370px) 1fr;gap:clamp(2rem,6vw,5rem);align-items:start}
+.sobre-retrato{position:sticky;top:6.5rem}
+.sobre-retrato img{width:100%;aspect-ratio:5/6;object-fit:cover;border:1px solid var(--tinta);filter:saturate(.82) contrast(1.05) sepia(.06)}
+.sobre-retrato figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.65rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--tinta-suave)}
+.sobre-lead{font-family:"Fraunces",Georgia,serif;font-size:clamp(1.35rem,2.6vw,1.8rem);line-height:1.35;font-weight:500;letter-spacing:-.01em;margin-bottom:1.6rem}
+.sobre-texto>p:not(.sobre-lead){color:var(--tinta-2);margin-bottom:1.1rem;max-width:62ch}
+.sobre-datos{margin-top:2.6rem;border-top:1px solid var(--tinta)}
+.sobre-datos>div{display:grid;grid-template-columns:minmax(130px,185px) 1fr;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.sobre-datos dt{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--tinta-suave)}
+.sobre-datos dd{font-weight:500;font-size:.98rem}
+.estado{display:inline-flex;align-items:center;gap:.6rem;color:var(--verde)}
+.trayectoria{margin-top:clamp(3.5rem,7vw,5.5rem)}
+.trayectoria-lista{border-top:1px solid var(--tinta)}
+.trayectoria-item{display:grid;grid-template-columns:145px 1fr auto;gap:1rem 2rem;padding:1.05rem 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.t-anio{font-variant-numeric:tabular-nums;font-weight:600;font-size:.88rem;color:var(--tinta-suave)}
+.t-cargo{font-weight:600;font-size:1.02rem}
+.t-lugar{color:var(--tinta-suave);font-size:.92rem;text-align:right}
+@media (max-width:900px){.sobre-grid{grid-template-columns:1fr}.sobre-retrato{position:static;max-width:420px}}
+@media (max-width:640px){.trayectoria-item{grid-template-columns:1fr;gap:.15rem}.t-lugar{text-align:left}}
+
+/* ============ 9. Servicios (acordeón) ============ */
+.servicio{border-top:1px solid var(--tinta)}
+.servicio:last-child{border-bottom:1px solid var(--tinta)}
+.servicio-head{
+  width:100%;display:grid;grid-template-columns:3rem 1fr auto;gap:1.5rem;align-items:center;
+  padding:1.55rem 0;background:none;border:0;text-align:left;cursor:pointer;
+}
+.servicio-nombre{font-family:"Fraunces",Georgia,serif;font-size:clamp(1.4rem,3vw,2.1rem);font-weight:500;letter-spacing:-.015em;transition:color .3s,transform .4s}
+.servicio.abierto .servicio-nombre,.servicio-head:hover .servicio-nombre{color:var(--verde)}
+.servicio-head:hover .servicio-nombre{transform:translateX(8px)}
+.servicio-icono{
+  width:42px;height:42px;border:1px solid var(--linea);border-radius:50%;
+  display:grid;place-items:center;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;
+}
+.servicio.abierto .servicio-icono{transform:rotate(45deg);background:var(--tinta);border-color:var(--tinta);color:var(--papel)}
+.servicio-cuerpo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1)}
+.servicio.abierto .servicio-cuerpo{grid-template-rows:1fr}
+.servicio-contenido{overflow:hidden}
+.servicio-contenido p{max-width:62ch;color:var(--tinta-2);padding-left:4.5rem;padding-bottom:.6rem}
+.etiquetas{display:flex;flex-wrap:wrap;gap:.5rem;padding-left:4.5rem;padding-bottom:1.9rem}
+.etiqueta{border:1px solid var(--linea);border-radius:999px;padding:.32rem .75rem;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--tinta-suave)}
+@media (max-width:700px){
+  .servicio-contenido p,.etiquetas{padding-left:0}
+  .servicio-head{grid-template-columns:2.2rem 1fr auto;gap:1rem}
+}
+
+/* ============ 10. Contacto (sección oscura) y pie ============ */
+.seccion-contacto{background:var(--tinta);color:var(--papel)}
+.seccion-contacto .seccion-cabecera{border-top-color:rgba(242,237,226,.4)}
+.seccion-contacto .ceja,.seccion-contacto .seccion-nota{color:rgba(242,237,226,.55)}
+.seccion-contacto .ceja-num{color:var(--acento-oscuro)}
+.contacto-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem 5rem;align-items:start}
+.contacto-titulo{font-family:"Fraunces",Georgia,serif;font-size:clamp(2.3rem,5.5vw,4.3rem);font-weight:500;line-height:1.06;letter-spacing:-.02em}
+.contacto-titulo em{color:var(--acento-oscuro)}
+.contacto-intro{color:rgba(242,237,226,.6);max-width:46ch;margin-top:1.5rem;font-size:1.05rem}
+.contacto-correo{margin-top:3rem;display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem}
+.correo-grande{
+  font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:clamp(1.45rem,3.6vw,2.5rem);
+  border-bottom:1.5px solid rgba(242,237,226,.35);padding-bottom:.35rem;
+  transition:color .3s,border-color .3s;word-break:break-all;
+}
+.correo-grande:hover{color:var(--acento-oscuro);border-color:var(--acento-oscuro)}
+.btn-copiar{
+  display:inline-flex;align-items:center;gap:.55rem;background:none;
+  border:1px solid rgba(242,237,226,.35);border-radius:999px;padding:.6rem 1.25rem;
+  font-size:.9rem;font-weight:600;cursor:pointer;transition:background .3s,color .3s,border-color .3s;
+}
+.btn-copiar:hover{background:var(--papel);color:var(--tinta);border-color:var(--papel)}
+.contacto-lista{border-top:1px solid rgba(242,237,226,.16)}
+.contacto-lista li{display:flex;align-items:center;gap:1rem;padding:1.05rem 0;border-bottom:1px solid rgba(242,237,226,.16);font-size:.98rem}
+.contacto-lista .icono{color:var(--acento-oscuro);width:1.3rem;height:1.3rem}
+.contacto-lista a{border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.contacto-lista a:hover{color:var(--acento-oscuro)}
+.social{display:flex;gap:.8rem;margin-top:2.4rem}
+.social a{
+  width:50px;height:50px;border:1px solid rgba(242,237,226,.3);border-radius:50%;
+  display:grid;place-items:center;transition:background .3s,color .3s,transform .3s,border-color .3s;
+}
+.social a:hover{background:var(--papel);color:var(--tinta);border-color:var(--papel);transform:translateY(-4px)}
+.social .icono{width:1.25rem;height:1.25rem}
+.seccion-contacto :focus-visible{outline-color:var(--acento-oscuro)}
+.pie{background:var(--tinta);color:rgba(242,237,226,.6);border-top:1px solid rgba(242,237,226,.15)}
+.pie-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap;padding-block:1.4rem;font-size:.85rem}
+.btn-arriba{display:inline-flex;align-items:center;gap:.5rem;background:none;border:0;color:var(--papel);font-weight:600;cursor:pointer;padding:.4rem 0;transition:color .3s}
+.btn-arriba .icono{transition:transform .3s}
+.btn-arriba:hover{color:var(--acento-oscuro)}
+.btn-arriba:hover .icono{transform:translateY(-3px)}
+@media (max-width:900px){.contacto-grid{grid-template-columns:1fr}}
+
+/* ============ 11. Toast y utilidades ============ */
+.toast{
+  position:fixed;left:50%;bottom:2rem;z-index:300;
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--tinta);color:var(--papel);border:1px solid rgba(242,237,226,.25);
+  padding:.8rem 1.4rem;border-radius:999px;font-size:.92rem;
+  box-shadow:0 10px 34px rgba(0,0,0,.28);
+  opacity:0;transform:translate(-50%,16px);pointer-events:none;
+  transition:opacity .35s,transform .35s;max-width:calc(100vw - 2.5rem);
+}
+.toast.visible{opacity:1;transform:translate(-50%,0)}
+.toast .icono{color:var(--acento-oscuro);width:1.2rem;height:1.2rem}
+</style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<!-- Sprite de iconos SVG (sin dependencias externas) -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-flecha-abajo" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flecha-arriba" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flecha-diag" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m22 7-10 6L2 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-asterisco" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor"/></symbol>
+</svg>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<header class="cabecera" id="cabecera">
+  <div class="contenedor cabecera-inner">
+    <a class="marca" href="#inicio">Camilo Restrepo<span class="marca-punto">.</span></a>
+    <nav class="nav-principal" aria-label="Navegación principal">
+      <a href="#trabajo">Trabajo</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#servicios">Servicios</a>
+    </nav>
+    <div class="cabecera-meta">
+      <span class="cabecera-reloj">Medellín · <span class="js-reloj">--:--</span> GMT-5</span>
+      <a class="cabecera-cta" href="#contacto">Hablemos</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuMovil" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-movil" id="menuMovil">
+  <nav aria-label="Navegación móvil">
+    <a href="#trabajo"><span>Trabajo</span><span class="menu-num">01</span></a>
+    <a href="#sobre-mi"><span>Sobre mí</span><span class="menu-num">02</span></a>
+    <a href="#servicios"><span>Servicios</span><span class="menu-num">03</span></a>
+    <a href="#contacto"><span>Contacto</span><span class="menu-num">04</span></a>
+  </nav>
+  <div class="menu-pie">
+    <a href="mailto:hola@camilorestrepo.co">hola@camilorestrepo.co</a>
+    <span>Medellín, Colombia · <span class="js-reloj">--:--</span> GMT-5</span>
+  </div>
+</div>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <canvas id="lienzoTopo" aria-hidden="true"></canvas>
+    <div class="contenedor hero-inner">
+      <div class="hero-superior" data-reveal>
+        <p class="disponible"><span class="pulso"></span>Disponible para nuevos proyectos</p>
+        <p class="hero-hora"><span class="js-reloj">--:--</span> · Medellín (GMT-5)</p>
+      </div>
+      <p class="hero-linea" data-reveal="1">Hola, soy Camilo Restrepo — <span class="rotador"><span id="rotadorTexto">diseñador de producto</span></span></p>
+      <h1 class="hero-titulo" data-reveal="2">Diseño productos<br>digitales con<br><em>propósito.</em></h1>
+      <p class="hero-sub" data-reveal="3">Diseñador de producto e ingeniero front-end con nueve años de experiencia. Ayudo a startups y empresas de Latinoamérica a lanzar productos claros, rápidos y con personalidad propia.</p>
+      <div class="hero-acciones" data-reveal="4">
+        <a class="btn btn-primario" href="#trabajo">Ver proyectos <svg class="icono" aria-hidden="true"><use href="#i-flecha-abajo"/></svg></a>
+        <a class="btn btn-secundario" href="#contacto">Hablemos</a>
+      </div>
+    </div>
+    <div class="hero-pie">
+      <div class="contenedor hero-pie-inner">
+        <span class="hero-scroll"><svg class="icono" aria-hidden="true"><use href="#i-flecha-abajo"/></svg> Desliza para explorar</span>
+        <span class="ocultar-movil">6.2442° N — 75.5812° O</span>
+        <span>Portafolio · 2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUESINA ============ -->
+  <div class="marquesina" aria-hidden="true">
+    <div class="marquesina-track">
+      <div class="marquesina-grupo">
+        <span class="marquesina-item">Diseño de producto <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Interfaces <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Design systems <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Front-end <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Prototipado <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Investigación <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Accesibilidad <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Dirección de arte <svg class="icono"><use href="#i-asterisco"/></svg></span>
+      </div>
+      <div class="marquesina-grupo">
+        <span class="marquesina-item">Diseño de producto <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Interfaces <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Design systems <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Front-end <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Prototipado <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Investigación <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Accesibilidad <svg class="icono"><use href="#i-asterisco"/></svg></span>
+        <span class="marquesina-item">Dirección de arte <svg class="icono"><use href="#i-asterisco"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TRABAJO ============ -->
+  <section class="seccion" id="trabajo">
+    <div class="contenedor">
+      <div class="seccion-cabecera" data-reveal>
+        <div>
+          <p class="ceja"><span class="ceja-num">(01)</span>Trabajo seleccionado</p>
+          <h2 class="seccion-titulo">Proyectos <em>recientes</em></h2>
+        </div>
+        <p class="seccion-nota">Cinco proyectos de más de cuarenta entregados desde 2016, para clientes en Colombia, México y Chile.</p>
+      </div>
+
+      <div class="lista-proyectos" id="listaProyectos">
+
+        <article class="proyecto" tabindex="0" role="button" data-img="https://picsum.photos/seed/avila-fintech/800/500.jpg">
+          <div class="proyecto-imagen"><img loading="lazy" src="https://picsum.photos/seed/avila-fintech/800/500.jpg" alt="Interfaz de Ávila, aplicación de banca digital"></div>
+          <div class="proyecto-fila">
+            <span class="indice" aria-hidden="true">01</span>
+            <div class="proyecto-info">
+              <h3 class="proyecto-titulo">Ávila</h3>
+              <p class="proyecto-desc">Banca digital para dos millones de usuarios en Colombia.</p>
+            </div>
+            <div class="proyecto-meta"><span>Fintech · App + Design System</span><span>2024</span></div>
+            <span class="proyecto-flecha" aria-hidden="true"><svg class="icono"><use href="#i-flecha-diag"/></svg></span>
+          </div>
+        </article>
+
+        <article class="proyecto" tabindex="0" role="button" data-img="https://picsum.photos/seed/cafe-origen-web/800/500.jpg">
+          <div class="proyecto-imagen"><img loading="lazy" src="https://picsum.photos/seed/cafe-origen-web/800/500.jpg" alt="Tienda en línea de Café Origen"></div>
+          <div class="proyecto-fila">
+            <span class="indice" aria-hidden="true">02</span>
+            <div class="proyecto-info">
+              <h3 class="proyecto-titulo">Café Origen</h3>
+              <p class="proyecto-desc">E-commerce que conecta caficultores directamente con tostadores.</p>
+            </div>
+            <div class="proyecto-meta"><span>Marca · E-commerce</span><span>2024</span></div>
+            <span class="proyecto-flecha" aria-hidden="true"><svg class="icono"><use href="#i-flecha-diag"/></svg></span>
+          </div>
+        </article>
+
+        <article class="proyecto" tabindex="0" role="button" data-img="https://picsum.photos/seed/ruta-pacifico-app/800/500.jpg">
+          <div class="proyecto-imagen"><img loading="lazy" src="https://picsum.photos/seed/ruta-pacifico-app/800/500.jpg" alt="Pantallas de Ruta Pacífico, guía cultural interactiva"></div>
+          <div class="proyecto-fila">
+            <span class="indice" aria-hidden="true">03</span>
+            <div class="proyecto-info">
+              <h3 class="proyecto-titulo">Ruta Pacífico</h3>
+              <p class="proyecto-desc">Guía cultural interactiva de la costa Pacífica colombiana.</p>
+            </div>
+            <div class="proyecto-meta"><span>Producto · App móvil</span><span>2023</span></div>
+            <span class="proyecto-flecha" aria-hidden="true"><svg class="icono"><use href="#i-flecha-diag"/></svg></span>
+          </div>
+        </article>
+
+        <article class="proyecto" tabindex="0" role="button" data-img="https://picsum.photos/seed/andes-health-web/800/500.jpg">
+          <div class="proyecto-imagen"><img loading="lazy" src="https://picsum.photos/seed/andes-health-web/800/500.jpg" alt="Plataforma web de telemedicina Andes Health"></div>
+          <div class="proyecto-fila">
+            <span class="indice" aria-hidden="true">04</span>
+            <div class="proyecto-info">
+              <h3 class="proyecto-titulo">Andes Health</h3>
+              <p class="proyecto-desc">Telemedicina para zonas rurales de Antioquia.</p>
+            </div>
+            <div class="proyecto-meta"><span>Healthtech · Plataforma web</span><span>2023</span></div>
+            <span class="proyecto-flecha" aria-hidden="true"><svg class="icono"><use href="#i-flecha-diag"/></svg></span>
+          </div>
+        </article>
+
+        <article class="proyecto" tabindex="0" role="button" data-img="https://picsum.photos/seed/selva-studio-brand/800/500.jpg">
+          <div class="proyecto-imagen"><img loading="lazy" src="https://picsum.photos/seed/selva-studio-brand/800/500.jpg" alt="Identidad visual y sitio web de Selva Studio"></div>
+          <div class="proyecto-fila">
+            <span class="indice" aria-hidden="true">05</span>
+            <div class="proyecto-info">
+              <h3 class="proyecto-titulo">Selva Studio</h3>
+              <p class="proyecto-desc">Identidad y sitio web para un estudio de arquitectura tropical.</p>
+            </div>
+            <div class="proyecto-meta"><span>Branding · Web</span><span>2022</span></div>
+            <span class="proyecto-flecha" aria-hidden="true"><svg class="icono"><use href="#i-flecha-diag"/></svg></span>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="trabajo-nota" data-reveal>¿Quieres conocer el detalle de algún caso? <a href="#contacto">Pídemelo por correo</a> y te comparto el estudio completo.</p>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE MÍ ============ -->
+  <section class="seccion seccion-tono" id="sobre-mi">
+    <div class="contenedor">
+      <div class="seccion-cabecera" data-reveal>
+        <div>
+          <p class="ceja"><span class="ceja-num">(02)</span>Sobre mí</p>
+          <h2 class="seccion-titulo">Menos ruido, más <em>señal</em></h2>
+        </div>
+        <p class="seccion-nota">Basado en Medellín, trabajando con clientes de toda Latinoamérica.</p>
+      </div>
+
+      <div class="sobre-grid">
+        <figure class="sobre-retrato" data-reveal>
+          <img loading="lazy" src="https://picsum.photos/seed/camilo-retrato-medellin/640/768.jpg" alt="Retrato de Camilo Restrepo en su estudio en Medellín">
+          <figcaption><span>Camilo Restrepo</span><span>Medellín — 2025</span></figcaption>
+        </figure>
+        <div class="sobre-texto" data-reveal="2">
+          <p class="sobre-lead">Soy diseñador de producto e ingeniero front-end. Llevo casi una década creando productos digitales que la gente usa todos los días.</p>
+          <p>Empecé como desarrollador front-end en Cali, me formé como diseñador en Bogotá y hoy trabajo desde Medellín con startups y empresas de toda la región. Diseño la estrategia y también escribo el código: sin intermediarios ni traducciones perdidas.</p>
+          <p>Creo que el buen diseño no necesita decoración — necesita jerarquía, ritmo y contenido claro. Y que un producto bien hecho se nota en los detalles que nadie nota.</p>
+          <p>Cuando no estoy frente a la pantalla, estoy subiendo un páramo en Antioquia o buscando el próximo café de origen.</p>
+          <dl class="sobre-datos">
+            <div><dt>Experiencia</dt><dd>9 años</dd></div>
+            <div><dt>Base</dt><dd>Medellín, Colombia (GMT-5)</dd></div>
+            <div><dt>Enfoque</dt><dd>Producto · UI · Front-end</dd></div>
+            <div><dt>Idiomas</dt><dd>Español nativo · Inglés B2</dd></div>
+            <div><dt>Estado</dt><dd><span class="estado"><span class="pulso"></span>Disponible para proyectos</span></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="trayectoria" data-reveal>
+        <p class="ceja"><span class="ceja-num">(—)</span>Trayectoria</p>
+        <ul class="trayectoria-lista">
+          <li class="trayectoria-item"><span class="t-anio">2021 — Hoy</span><span class="t-cargo">Diseñador de producto sénior</span><span class="t-lugar">Fractal Studio · Medellín</span></li>
+          <li class="trayectoria-item"><span class="t-anio">2018 — 2021</span><span class="t-cargo">Diseñador UI/UX</span><span class="t-lugar">Cobre Lab · Bogotá</span></li>
+          <li class="trayectoria-item"><span class="t-anio">2016 — 2018</span><span class="t-cargo">Desarrollador front-end</span><span class="t-lugar">Kanto Digital · Cali</span></li>
+          <li class="trayectoria-item"><span class="t-anio">2014 — 2016</span><span class="t-cargo">Diseñador independiente</span><span class="t-lugar">Freelance · Colombia</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section class="seccion" id="servicios">
+    <div class="contenedor">
+      <div class="seccion-cabecera" data-reveal>
+        <div>
+          <p class="ceja"><span class="ceja-num">(03)</span>Servicios</p>
+          <h2 class="seccion-titulo">Del research al <em>código</em></h2>
+        </div>
+        <p class="seccion-nota">Cuatro formas de trabajar juntos, del primer boceto al deploy final.</p>
+      </div>
+
+      <div class="servicios" data-reveal>
+        <div class="servicio abierto">
+          <button class="servicio-head" type="button" aria-expanded="true" aria-controls="serv-1">
+            <span class="indice" aria-hidden="true">01</span>
+            <span class="servicio-nombre">Diseño de producto</span>
+            <span class="servicio-icono" aria-hidden="true"><svg class="icono"><use href="#i-mas"/></svg></span>
+          </button>
+          <div class="servicio-cuerpo" id="serv-1">
+            <div class="servicio-contenido">
+              <p>Desde la investigación con usuarios hasta el prototipo validado. Definimos el problema, mapeamos el recorrido y diseñamos la solución completa antes de escribir una línea de código.</p>
+              <ul class="etiquetas"><li class="etiqueta">Research</li><li class="etiqueta">User flows</li><li class="etiqueta">Wireframes</li><li class="etiqueta">Prototipado</li><li class="etiqueta">Testing</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="servicio">
+          <button class="servicio-head" type="button" aria-expanded="false" aria-controls="serv-2">
+            <span class="indice" aria-hidden="true">02</span>
+            <span class="servicio-nombre">Diseño de interfaces</span>
+            <span class="servicio-icono" aria-hidden="true"><svg class="icono"><use href="#i-mas"/></svg></span>
+          </button>
+          <div class="servicio-cuerpo" id="serv-2">
+            <div class="servicio-contenido">
+              <p>Interfaces claras con personalidad propia: tipografía cuidada, sistemas de color coherentes y componentes accesibles listos para escalar.</p>
+              <ul class="etiquetas"><li class="etiqueta">UI</li><li class="etiqueta">Design systems</li><li class="etiqueta">Accesibilidad</li><li class="etiqueta">WCAG</li><li class="etiqueta">Motion</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="servicio">
+          <button class="servicio-head" type="button" aria-expanded="false" aria-controls="serv-3">
+            <span class="indice" aria-hidden="true">03</span>
+            <span class="servicio-nombre">Desarrollo front-end</span>
+            <span class="servicio-icono" aria-hidden="true"><svg class="icono"><use href="#i-mas"/></svg></span>
+          </button>
+          <div class="servicio-cuerpo" id="serv-3">
+            <div class="servicio-contenido">
+              <p>El diseño no se negocia en la implementación. Construyo interfaces rápidas y fieles al diseño original, con HTML, CSS y JavaScript puro.</p>
+              <ul class="etiquetas"><li class="etiqueta">HTML/CSS/JS</li><li class="etiqueta">Rendimiento</li><li class="etiqueta">Animación</li><li class="etiqueta">Responsive</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="servicio">
+          <button class="servicio-head" type="button" aria-expanded="false" aria-controls="serv-4">
+            <span class="indice" aria-hidden="true">04</span>
+            <span class="servicio-nombre">Marca &amp; dirección de arte</span>
+            <span class="servicio-icono" aria-hidden="true"><svg class="icono"><use href="#i-mas"/></svg></span>
+          </button>
+          <div class="servicio-cuerpo" id="serv-4">
+            <div class="servicio-contenido">
+              <p>Para productos que nacen: identidad visual, tono de voz y una base tipográfica que se nota en cada pantalla.</p>
+              <ul class="etiquetas"><li class="etiqueta">Identidad</li><li class="etiqueta">Tipografía</li><li class="etiqueta">Guías de estilo</li><li class="etiqueta">Dirección de arte</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="seccion seccion-contacto" id="contacto">
+    <div class="contenedor">
+      <div class="seccion-cabecera" data-reveal>
+        <div>
+          <p class="ceja"><span class="ceja-num">(04)</span>Contacto</p>
+          <h2 class="contacto-titulo">¿Tienes un proyecto en mente? <em>Hablemos.</em></h2>
+        </div>
+        <p class="seccion-nota">Cuéntame qué quieres construir y te respondo en menos de 24 horas, en español o inglés.</p>
+      </div>
+
+      <div class="contacto-grid">
+        <div data-reveal>
+          <div class="contacto-correo">
+            <a class="correo-grande" href="mailto:hola@camilorestrepo.co">hola@camilorestrepo.co</a>
+            <button class="btn-copiar" id="btnCopiar" type="button" data-correo="hola@camilorestrepo.co">
+              <svg class="icono" aria-hidden="true"><use href="#i-copiar"/></svg> Copiar correo
+            </button>
+          </div>
+        </div>
+        <div data-reveal="2">
+          <ul class="contacto-lista">
+            <li><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:hola@camilorestrepo.co">hola@camilorestrepo.co</a></li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg><a href="https://wa.me/573105550123" target="_blank" rel="noopener">WhatsApp · +57 310 555 0123</a></li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-reloj"/></svg><span>Lun — Vie · 9:00 a 18:00 (GMT-5)</span></li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-pin"/></svg><span>Medellín, Colombia</span></li>
+          </ul>
+          <div class="social">
+            <a href="https://www.linkedin.com/in/camilorestrepo" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icono" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+            <a href="https://github.com/camilorestrepo" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icono" aria-hidden="true"><use href="#i-github"/></svg></a>
+            <a href="https://www.instagram.com/camilorestrepo.co" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icono" aria-hidden="true"><use href="#i-instagram"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie-inner">
+    <p>© <span id="anio">2025</span> Camilo Restrepo — Medellín, Colombia</p>
+    <p class="ocultar-movil">Diseñado y programado a mano. Sin plantillas.</p>
+    <button class="btn-arriba" id="btnArriba" type="button">Volver arriba <svg class="icono" aria-hidden="true"><use href="#i-flecha-arriba"/></svg></button>
+  </div>
+</footer>
+
+<!-- Vista previa flotante de proyectos (escritorio) -->
+<div class="vista-previa" id="vistaPrevia" aria-hidden="true"><img src="" alt=""></div>
+
+<!-- Notificación (toast) -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>
+  <span id="toastMensaje"></span>
+</div>
+
+<script>
+/* Toast global */
+let toastTimer = null;
+function mostrarToast(mensaje){
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMensaje').textContent = mensaje;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('visible'), 2800);
+}
+
+/* ============ 1. Mapa topográfico interactivo (hero) ============ */
+/* Contour lines generated with value noise + marching squares.
+   They drift slowly and deform around the cursor — a nod to the
+   Andes mountains surrounding Medellín. */
+(function topo(){
+  const canvas = document.getElementById('lienzoTopo');
+  const hero = document.getElementById('inicio');
+  if(!canvas || !hero) return;
+  const ctx = canvas.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const punteroFino = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* Deterministic value-noise (seeded shuffle) */
+  const perm = new Uint8Array(512);
+  (function(){
+    const p = Array.from({length:256}, (_, i) => i);
+    let s = 20250;
+    const rnd = () => { s = (s * 16807) % 2147483647; return s / 2147483647; };
+    for(let i = 255; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); const t = p[i]; p[i] = p[j]; p[j] = t; }
+    for(let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  })();
+  const suavizar = t => t * t * (3 - 2 * t);
+  function ruido(x, y){
+    const xi = Math.floor(x), yi = Math.floor(y);
+    const u = suavizar(x - xi), v = suavizar(y - yi);
+    const h = (X, Y) => perm[(perm[X & 255] + (Y & 255)) & 511] / 255;
+    const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  }
+  function fbm(x, y){
+    return .54 * ruido(x, y)
+         + .28 * ruido(x * 2.03 + 31.4, y * 2.03 + 17.7)
+         + .18 * ruido(x * 4.11 + 7.3,  y * 4.11 + 91.2);
+  }
+
+  const CELDA = 16;                 /* grid cell size in px */
+  const niveles = [];               /* contour thresholds */
+  for(let i = 0; i <= 11; i++) niveles.push(.34 + i * .028);
+  const NIVEL_ACENTO = 5;           /* the emerald contour line */
+  let W = 0, H = 0, cols = 0, rows = 0, campo = new Float32Array(0);
+  let t = Math.random() * 100;
+  const puntero = { x: -9999, y: -9999, dentro: false, fuerza: 0 };
+
+  function medir(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(W / CELDA); rows = Math.ceil(H / CELDA);
+    campo = new Float32Array((cols + 1) * (rows + 1));
+  }
+
+  hero.addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect();
+    puntero.x = e.clientX - r.left; puntero.y = e.clientY - r.top; puntero.dentro = true;
+  }, {passive: true});
+  hero.addEventListener('pointerleave', () => puntero.dentro = false);
+
+  function calcular(){
+    const ox = t * .06, oy = -t * .023;
+    let bx, by, ba;
+    if(punteroFino){
+      puntero.fuerza += ((puntero.dentro ? 1 : 0) - puntero.fuerza) * .07;
+      bx = puntero.x; by = puntero.y; ba = puntero.fuerza * .16;
+    } else {
+      /* on touch screens a bump wanders on its own so it still feels alive */
+      bx = W * (.5 + .34 * Math.sin(t * .45));
+      by = H * (.5 + .30 * Math.cos(t * .33));
+      ba = .13;
+    }
+    const s2 = 2 * 95 * 95, corte = s2 * 9;
+    let k = 0;
+    for(let j = 0; j <= rows; j++){
+      const py = j * CELDA, ny = py * .0068 + oy, dy = py - by, dy2 = dy * dy;
+      for(let i = 0; i <= cols; i++, k++){
+        const px = i * CELDA;
+        let v = fbm(px * .005 + ox, ny);
+        if(ba > .001){
+          const dx = px - bx, d2 = dx * dx + dy2;
+          if(d2 < corte) v += ba * Math.exp(-d2 / s2);
+        }
+        campo[k] = v;
+      }
+    }
+  }
+
+  function trazar(){
+    ctx.clearRect(0, 0, W, H);
+    const ancho = cols + 1;
+    for(let n = 0; n < niveles.length; n++){
+      const L = niveles[n];
+      ctx.beginPath();
+      for(let j = 0; j < rows; j++){
+        for(let i = 0; i < cols; i++){
+          const iTL = j * ancho + i;
+          const tl = campo[iTL], tr = campo[iTL + 1];
+          const bl = campo[iTL + ancho], br = campo[iTL + ancho + 1];
+          let c = 0; if(tl > L) c |= 1; if(tr > L) c |= 2; if(br > L) c |= 4; if(bl > L) c |= 8;
+          if(c === 0 || c === 15) continue;
+          const x = i * CELDA, y = j * CELDA;
+          /* edge intersection points (linear interpolation) */
+          const arriba  = () => [x + (L - tl) / (tr - tl) * CELDA, y];
+          const abajo   = () => [x + (L - bl) / (br - bl) * CELDA, y + CELDA];
+          const derecha = () => [x + CELDA, y + (L - tr) / (br - tr) * CELDA];
+          const izq     = () => [x, y + (L - tl) / (bl - tl) * CELDA];
+          let segs;
+          switch(c){
+            case 1: case 14: segs = [izq, arriba]; break;
+            case 2: case 13: segs = [arriba, derecha]; break;
+            case 3: case 12: segs = [izq, derecha]; break;
+            case 4: case 11: segs = [derecha, abajo]; break;
+            case 6: case 9:  segs = [arriba, abajo]; break;
+            case 7: case 8:  segs = [izq, abajo]; break;
+            case 5:  segs = [izq, arriba, derecha, abajo]; break;
+            case 10: segs = [arriba, derecha, izq, abajo]; break;
+          }
+          for(let s = 0; s < segs.length; s += 2){
+            const p = segs[s](), q = segs[s + 1]();
+            ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]);
+          }
+        }
+      }
+      if(n === NIVEL_ACENTO){ ctx.strokeStyle = 'rgba(19,106,78,.85)'; ctx.lineWidth = 1.5; }
+      else { ctx.strokeStyle = 'rgba(27,24,18,.30)'; ctx.lineWidth = 1; }
+      ctx.stroke();
+    }
+  }
+
+  /* animation loop, paused when hero is off-screen or tab is hidden */
+  let raf = null, corriendo = false, heroVisible = true;
+  function cuadro(){ t += .006; calcular(); trazar(); raf = requestAnimationFrame(cuadro); }
+  function sincronizar(){
+    const deberia = heroVisible && !document.hidden && !reduce;
+    if(deberia && !corriendo){ corriendo = true; raf = requestAnimationFrame(cuadro); }
+    else if(!deberia && corriendo){ corriendo = false; cancelAnimationFrame(raf); }
+  }
+  medir(); calcular(); trazar();   /* first (static) frame */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(en => { heroVisible = en[0].isIntersecting; sincronizar(); }).observe(hero);
+  }
+  document.addEventListener('visibilitychange', sincronizar);
+  let rt = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { medir(); calcular(); trazar(); }, 150);
+  });
+})();
+
+/* ============ 2. Custom cursor + floating project preview ============ */
+(function puntero(){
+  const fina = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!fina || reduce) return;
+  const cursor = document.getElementById('cursor');
+  const lista = document.getElementById('listaProyectos');
+  const previa = document.getElementById('vistaPrevia');
+  const imgPrevia = previa ? previa.querySelector('img') : null;
+
+  let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
+  let tx = mx, ty = my, px = mx, py = my, rot = 0, esc = .85, escT = .85;
+  let previaUsada = false;
+
+  document.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, {passive: true});
+  const SEL = 'a, button, .proyecto, .servicio-head, [data-cursor]';
+  document.addEventListener('mouseover', e => { if(e.target.closest(SEL)) cursor.classList.add('cursor--enlace'); });
+  document.addEventListener('mouseout',  e => { if(e.target.closest(SEL)) cursor.classList.remove('cursor--enlace'); });
+  document.addEventListener('pointerdown', () => cursor.classList.add('cursor--pulsado'));
+  document.addEventListener('pointerup',   () => cursor.classList.remove('cursor--pulsado'));
+  document.documentElement.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+  document.documentElement.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+
+  if(lista && previa){
+    /* preload project images */
+    lista.querySelectorAll('.proyecto').forEach(p => { const im = new Image(); im.src = p.dataset.img; });
+    lista.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; }, {passive: true});
+    lista.addEventListener('pointerover', e => {
+      const p = e.target.closest('.proyecto');
+      if(!p || !p.dataset.img) return;
+      if(imgPrevia.getAttribute('src') !== p.dataset.img) imgPrevia.src = p.dataset.img;
+      if(!previaUsada){ px = tx; py = ty; previaUsada = true; }
+      escT = 1;
+      previa.classList.add('visible');
+    });
+    lista.addEventListener('pointerleave', () => { escT = .85; previa.classList.remove('visible'); });
+  }
+
+  (function cuadro(){
+    /* cursor follows with a slight lag */
+    cx += (mx - cx) * .32; cy += (my - cy) * .32;
+    cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+    /* preview glides after the cursor with a subtle velocity tilt */
+    if(previa){
+      const w = previa.offsetWidth, h = previa.offsetHeight;
+      const destX = Math.min(Math.max(tx + 26, 12), innerWidth - w - 12);
+      const destY = Math.min(Math.max(ty - h * .55, 12), innerHeight - h - 12);
+      const vx = destX - px;
+      px += vx * .16; py += (destY - py) * .16;
+      rot += (Math.max(-9, Math.min(9, vx * .35)) - rot) * .10;
+      esc += (escT - esc) * .14;
+      previa.style.transform = 'translate(' + px + 'px,' + py + 'px) rotate(' + rot + 'deg) scale(' + esc + ')';
+    }
+    requestAnimationFrame(cuadro);
+  })();
+})();
+
+/* ============ 3. Rotating role in the hero ============ */
+(function rotador(){
+  const el = document.getElementById('rotadorTexto');
+  if(!el) return;
+  const frases = ['diseñador de producto', 'ingeniero front-end', 'diseñador de interfaces', 'mentor de diseño'];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % frases.length;
+    if(reduce){ el.textContent = frases[i]; return; }
+    el.classList.add('fuera');
+    setTimeout(() => {
+      el.textContent = frases[i];
+      el.classList.add('sin-transicion', 'desde-abajo');
+      void el.offsetWidth;                 /* force reflow before releasing */
+      el.classList.remove('sin-transicion', 'desde-abajo', 'fuera');
+    }, 380);
+  }, 3400);
+})();
+
+/* ============ 4. Local time in Bogotá (several displays) ============ */
+(function reloj(){
+  const els = document.querySelectorAll('.js-reloj');
+  if(!els.length) return;
+  const fmt = new Intl.DateTimeFormat('es-CO', { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', hour12: false });
+  const tic = () => { const t = fmt.format(new Date()); els.forEach(e => e.textContent = t); };
+  tic(); setInterval(tic, 5000);
+})();
+
+/* ============ 5. Header state on scroll ============ */
+(function cabecera(){
+  const cab = document.getElementById('cabecera');
+  const onScroll = () => cab.classList.toggle('escrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ============ 6. Mobile menu ============ */
+(function menu(){
+  const btn = document.getElementById('menuBtn');
+  const overlay = document.getElementById('menuMovil');
+  if(!btn || !overlay) return;
+  const abrir = v => {
+    document.body.classList.toggle('menu-abierto', v);
+    btn.setAttribute('aria-expanded', v);
+    btn.setAttribute('aria-label', v ? 'Cerrar menú' : 'Abrir menú');
+    document.body.style.overflow = v ? 'hidden' : '';
+  };
+  btn.addEventListener('click', () => abrir(!document.body.classList.contains('menu-abierto')));
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => abrir(false)));
+})();
+
+/* ============ 7. Scroll-reveal with stagger ============ */
+(function revelar(){
+  const els = document.querySelectorAll('[data-reveal]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!('IntersectionObserver' in window) || reduce){
+    els.forEach(e => e.classList.add('visible')); return;
+  }
+  const io = new IntersectionObserver(en => {
+    en.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => {
+    const d = parseInt(el.dataset.reveal || '0', 10);
+    if(d) el.style.transitionDelay = (d * 90) + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* ============ 8. Services accordion (exclusive) ============ */
+(function servicios(){
+  const items = Array.from(document.querySelectorAll('.servicio'));
+  if(!items.length) return;
+  items.forEach(item => {
+    const head = item.querySelector('.servicio-head');
+    head.addEventListener('click', () => {
+      const abierto = item.classList.contains('abierto');
+      items.forEach(o => {
+        o.classList.remove('abierto');
+        o.querySelector('.servicio-head').setAttribute('aria-expanded', 'false');
+      });
+      if(!abierto){ item.classList.add('abierto'); head.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+})();
+
+/* ============ 9. Projects: toast instead of dead links ============ */
+(function proyectos(){
+  const lista = document.getElementById('listaProyectos');
+  if(!lista) return;
+  const aviso = () => mostrarToast('Caso de estudio disponible a pedido — hola@camilorestrepo.co');
+  lista.addEventListener('click', e => { if(e.target.closest('.proyecto')) aviso(); });
+  lista.addEventListener('keydown', e => {
+    if((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('proyecto')){ e.preventDefault(); aviso(); }
+  });
+})();
+
+/* ============ 10. Copy email to clipboard ============ */
+(function copiar(){
+  const btn = document.getElementById('btnCopiar');
+  if(!btn) return;
+  btn.addEventListener('click', async () => {
+    const correo = btn.dataset.correo;
+    try{ await navigator.clipboard.writeText(correo); }
+    catch(err){
+      const ta = document.createElement('textarea');
+      ta.value = correo; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      ta.remove();
+    }
+    mostrarToast('Correo copiado: ' + correo);
+  });
+})();
+
+/* ============ 11. Back to top + current year ============ */
+document.getElementById('btnArriba').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+document.getElementById('anio').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
